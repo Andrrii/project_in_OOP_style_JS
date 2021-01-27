@@ -5,7 +5,7 @@ const webpack = require("webpack-stream");
 const browsersync = require("browser-sync");
 
 //const dist = "./dist/";
- const dist = "D:/MAMP/htdocs/project_in_OOP_style_JS"; // Ссылка на вашу папку на сервере
+const dist = "D:/MAMP/htdocs/project_in_OOP_style_JS"; // Ссылка на вашу папку на сервере
 
 gulp.task("copy-html", () => {
     return gulp.src("./src/*.html")
@@ -98,4 +98,4 @@ gulp.task("build-prod-js", () => {
                 .pipe(gulp.dest(dist));
 });
 
-gulp.task("default", gulp.parallel("watch", "build"));
+gulp.task("default", gulp.parallel(/*"watch",*/ "build"));

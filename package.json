@@ -1,12 +1,12 @@
 {
-  "name": "loan",
-  "version": "1.0.0",
-  "description": "",
+  "name": "project_in_oop_style_js",
+  "version": "0.7.9",
+  "description": "fourth project",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "@butso4ka",
   "license": "ISC",
   "browserslist": [
     "> 1%",
@@ -23,5 +23,17 @@
     "gulp": "^4.0.2",
     "webpack": "^4.41.2",
     "webpack-stream": "^5.2.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andrrii/project_in_OOP_style_JS.git"
+  },
+  "keywords": [
+    "js",
+    "oop"
+  ],
+  "bugs": {
+    "url": "https://github.com/Andrrii/project_in_OOP_style_JS/issues"
+  },
+  "homepage": "https://github.com/Andrrii/project_in_OOP_style_JS#readme"
 }
