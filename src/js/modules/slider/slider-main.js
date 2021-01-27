@@ -1,11 +1,11 @@
-export default  class Slider{
-    constructor(page,btns) {
-        this.page = document.querySelector(page);
-        this.slides = this.page.children;
-        this.btns = document.querySelectorAll(btns)
-        this.slideIndex = 1
-    }
+import Slider from "./slider"
 
+export default class MainSlider extends Slider // Наслідування
+{
+    constructor(btns){
+        super(btns)
+    }
+    
     showSlides(n) {
         if(n > this.slides.length) {
             this.slideIndex = 1
@@ -29,7 +29,7 @@ export default  class Slider{
 
         this.slides.forEach(slide => {
             slide.style.display = "none"
-           
+            
         });
 
         this.slides[this.slideIndex-1].style.display = 'block'
@@ -40,7 +40,7 @@ export default  class Slider{
         this.showSlides(this.slideIndex += n)
     }
 
-    
+
 
     render() {
         try{
@@ -60,6 +60,4 @@ export default  class Slider{
 
         this.showSlides(this.slideIndex)
     }
-
-    
 }
