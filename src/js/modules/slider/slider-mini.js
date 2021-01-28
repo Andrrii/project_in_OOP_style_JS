@@ -3,9 +3,13 @@ import Slider from "./slider"
 export default class MiniSlider extends Slider {
     constructor(container,previous,next,activeClass,animate,autoplay){
         super(container,previous,next,activeClass,animate,autoplay);
+        
     }
 
+
+
     decorizeSlides(){
+        
         this.slides.forEach(slide => {
             slide.classList.remove(this.activeClass)
             if(this.animate){
@@ -26,24 +30,27 @@ export default class MiniSlider extends Slider {
     }
 
     nextSlide(){
-        if(this.slides[1].tagName == "BUTTON" && this.slides[2].tagName == "BUTTON" ){
-            /* Просто кнопки і слайди знаодяться в одному контейнері */
-            this.container.appendChild(this.slides[0]) //slide
-            this.container.appendChild(this.slides[1]) //button
-            this.container.appendChild(this.slides[2]) //button
-            this.decorizeSlides()
-        }else if (this.slides[1].tagName == "BUTTON"){
-            this.container.appendChild(this.slides[0]) //slide
-            this.container.appendChild(this.slides[1]) //button}
+        if(this.slides[1].tagName === "BUTTON" && this.slides[2].tagName === "BUTTON" ){
+            let active = this.slides[0]
+            let firstBtn = this.slides[1]
+            let secondBtn = this.slides[2]
+            this.container.appendChild(active)
+            active.after(firstBtn)
+            firstBtn.after(secondBtn)
+
             this.decorizeSlides()
         }
+    
         else{
-        this.container.appendChild(this.slides[0]) // first elem go to the end for list
-        this.decorizeSlides()
-        }
+            this.container.appendChild(this.slides[0]) // first elem go to the end for list
+            this.decorizeSlides()}
     }
     bindTriggers() {
-        this.next.addEventListener('click', () => {this.nextSlide()    
+        this.next.addEventListener('click', () => {
+            this.nextSlide() 
+            if(this.autoplay){
+                this.stopStartSlides()
+            }
             })
 
         this.previous.addEventListener('click', () => {
@@ -56,14 +63,44 @@ export default class MiniSlider extends Slider {
                     this.decorizeSlides()
                     break
                 }
+                
             }
 
-            
+            if(this.autoplay){
+                this.stopStartSlides()
+            }
 
+        })
+    }
+    autoplaySlides() {
+        
+            
+            let interval = setInterval(function() {this.nextSlide()}.bind(this),7000)
+            this.interval = interval
+    }
+    stopStartSlides() {
+        clearTimeout(this.timeout)
+                clearInterval(this.interval)
+                this.timeout = setTimeout(function() {
+                    this.interval = setInterval(function() {this.nextSlide()}.bind(this),5000)
+
+                }.bind(this),7000)
+    }
+    bindmouseEnter() {
+        
+        
+        
+        this.container.childNodes.forEach(child =>{
+            child.addEventListener('mouseenter',() => { // Коли наводим мишу на слайдер то анімація зупиняється
+            clearInterval( this.interval)
+        })
+        child.addEventListener('mouseleave',() => {
+            this.stopStartSlides()        })
         })
     }
 
     init() {
+        
         this.container.style.cssText = `
             display: flex;
             flex-wrap: wrap;
@@ -71,10 +108,14 @@ export default class MiniSlider extends Slider {
             align-items: flex-start;
         
         `
+        
+        if(this.autoplay){
+            
+            this.autoplaySlides()
+            this.bindmouseEnter()
+          }
         this.bindTriggers()
         this.decorizeSlides()
-        if(this.autoplay){
-            setInterval(() => this.nextSlide(),5000)
-        }
+        
     }
 }

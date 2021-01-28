@@ -1,7 +1,7 @@
 import MainSlider from "./modules/slider//slider-main"
 import MiniSlider from "./modules/slider/slider-mini"
 import VideoPlayer from "./modules/videoPlayer"
-
+import Difference from './modules/difference'
 
 window.addEventListener("DOMContentLoaded",() => {
     const mainslider = new MainSlider({container:'.page',btns:'.next'})
@@ -29,12 +29,14 @@ window.addEventListener("DOMContentLoaded",() => {
         container:".feed__slider",
         previous: ".feed__slider .slick-prev",
         next: ".feed__slider .slick-next",
-        activeClass: "feed__item-active"
+        activeClass: "feed__item-active",
+        autoplay:true
     })
     feedSlider.init()
 
     const videoPlayer = new VideoPlayer('.showup .play','.overlay')
     videoPlayer.init()
 
+    new Difference('.officerold','.officernew','.officer__card-item').init()
 
 })
