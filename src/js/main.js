@@ -2,6 +2,9 @@ import MainSlider from "./modules/slider//slider-main"
 import MiniSlider from "./modules/slider/slider-mini"
 import VideoPlayer from "./modules/videoPlayer"
 import Difference from './modules/difference'
+import Form from "./modules/form"
+import ShowInfo from  "./modules/showInfo"
+import DownloadFile from "./modules/download"
 
 window.addEventListener("DOMContentLoaded",() => {
     const mainslider = new MainSlider({container:'.page',btns:'.next'})
@@ -34,9 +37,17 @@ window.addEventListener("DOMContentLoaded",() => {
     })
     feedSlider.init()
 
+    const moduleSlider = new MainSlider({container: ".moduleapp",btns: ".next "}) // Slider на другій сторінці
+    moduleSlider.render()
+
     const videoPlayer = new VideoPlayer('.showup .play','.overlay')
     videoPlayer.init()
+    new VideoPlayer('.module__video-item .play','.overlay').init() // videoplayer на modules.html
 
     new Difference('.officerold','.officernew','.officer__card-item').init()
+    new Form('.form').init()
 
+     new ShowInfo('.plus__content').init()
+
+     new DownloadFile('.download').init()
 })

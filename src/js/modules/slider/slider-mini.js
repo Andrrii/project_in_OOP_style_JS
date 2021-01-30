@@ -100,7 +100,7 @@ export default class MiniSlider extends Slider {
     }
 
     init() {
-        
+        try{
         this.container.style.cssText = `
             display: flex;
             flex-wrap: wrap;
@@ -116,6 +116,6 @@ export default class MiniSlider extends Slider {
           }
         this.bindTriggers()
         this.decorizeSlides()
-        
+        }catch(e){}
     }
 }

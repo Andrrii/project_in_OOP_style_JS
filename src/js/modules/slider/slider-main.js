@@ -40,12 +40,7 @@ export default class MainSlider extends Slider // Наслідування
         this.showSlides(this.slideIndex += n)
     }
 
-
-
-    render() {
-        try{
-            this.hanson = document.querySelector('.hanson')
-        }catch(e){}
+    bindTriggers() {
         this.btns.forEach(btn => {
             btn.addEventListener('click',() => {
                 this.plusSlides(1)
@@ -57,7 +52,34 @@ export default class MainSlider extends Slider // Наслідування
                 this.showSlides(this.slideIndex)
             })
         })
+        // для слайдеру на сторінці modules.html
+        document.querySelectorAll('.prevmodule').forEach(btn => {
+            btn.addEventListener('click',(e) => {
+                e.preventDefault()
+                e.stopPropagation() // read in the Internet
+                this.plusSlides(-1)
+            })
+        })
+        document.querySelectorAll('.next .nextmodule').forEach(btn => {
+            btn.addEventListener('click',(e) => {
+                e.preventDefault()
+                e.stopPropagation() // read in the Internet
+                this.plusSlides(1)
+            })
+        })
+        //------------
+    }
 
+
+    render() {
+        if(this.container) { /* для роботи в конкретній сторінці сайту */
+        try{
+            this.hanson = document.querySelector('.hanson')
+        }catch(e){}
+        
         this.showSlides(this.slideIndex)
+        this.bindTriggers()
+        
+        }
     }
 }
